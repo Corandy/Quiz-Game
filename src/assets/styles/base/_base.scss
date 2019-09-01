@@ -4,12 +4,13 @@ html {
 
 body {
   font-family: Helvetica, Arial, sans-serif;
-  font-size: 14px;
+  font-size: 14px;  
 }
 
 body, .wrapper {
   min-height: 100vh;
   position: relative;
+  position:fixed;
 }
 
 button {

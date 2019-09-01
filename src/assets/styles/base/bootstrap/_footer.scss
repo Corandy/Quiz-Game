@@ -1,8 +1,16 @@
 .main-panel > .footer {
     position:fixed;
+    display: flex;
+    justify-content: center;
+    width: 100%;
     bottom: 0px;
     height: 50px;
     padding: 0 10px;
+
+    > .container-fluid {
+      display: flex;
+      align-content: center;
+    }
     ul {
       list-style: none;
       margin: 0;
@@ -18,6 +26,6 @@
       }
     }
     .copyright {
-      color: #9B9B9B;	font-family: "Open Sans";	font-size: 11px;	line-height: 15px;	text-align: right;
+      color: #9B9B9B;	font-family: "Open Sans";	font-size: 11px;	line-height: 17px;	text-align: right;
     }
   }

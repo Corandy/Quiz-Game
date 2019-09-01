@@ -1,33 +1,27 @@
 import React from 'react';
-import { connect } from 'react-redux';
-import { Route, withRouter } from 'react-router-dom';
+import { Route, } from 'react-router-dom';
 
 import Header from './Header';
 import Footer from './Footer';
 
-import Home from './Home';
+import Login from './Login';
+import Quiz from './Quiz';
+import Results from './Results';
 
-const Main = ({history}) => {
-  history.listen(() => {});
-  let baseURL = '';//process.env.ROOT_URL !== '' ? '/' + process.env.ROOT_URL : process.env.ROOT_URL;
+const Main = () => {
   return (
       <div className="wrapper">
         <div className="main-panel">
           <Header />
-          <Route exact path={baseURL+"/:pageNo*/account::id"} component={Location} /> 
-          <Route exact path={baseURL+"/"} component={Home} />
+          <div className="content" style={{marginTop: '5%'}}>
+              <Route exact path={"/login"} component={Login} />
+              <Route exact path={"/"} component={Quiz} />
+              <Route exact path={"/results"} component={Results} />              
+          </div>
           <Footer />
         </div>
       </div>
   )
 };
 
-const mapStateToProp = state => ({
-  
-});
-
-const mapDispatchToProps = (dispatch, ownProps) => ({
-  
-});
-
-export default withRouter(connect(mapStateToProp, mapDispatchToProps)(Main));
+export default Main;

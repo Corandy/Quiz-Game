@@ -1,0 +1,32 @@
+[
+    {
+        "userId" : "7d806dc6-2ad2-3daa-b50c-9619a7388e3b",
+        "results" : [
+            {
+                "id": 23,
+                "answer": 3,
+                "goodAnswer": false
+            },
+            {
+                "id": 55,
+                "answer": 1,
+                "goodAnswer": true
+            }
+        ]
+    },
+    {
+        "userId" : "a3246d0c-a241-3045-8e14-a7b0c666b96a",
+        "results" : [
+            {
+                "id": 23,
+                "answer": 3,
+                "goodAnswer": false
+            },
+            {
+                "id": 55,
+                "answer": 1,
+                "goodAnswer": true
+            }
+        ]
+    }
+]

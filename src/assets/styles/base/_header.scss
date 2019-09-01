@@ -1,0 +1,17 @@
+@media (orientation:landscape) {
+    .header__image {
+        margin-top: 5%;
+        max-width: 300px;
+        margin-left: 50%;
+        transform: translateX(-50%)
+    }
+}
+
+@media (orientation:portrait) {
+    .header__image {
+        margin-top: 10%;
+        max-width: 60%;
+        margin-left: 50%;
+        transform: translateX(-50%)
+    }
+}
