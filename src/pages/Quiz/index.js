@@ -4,26 +4,43 @@ import { bindActionCreators } from 'redux'
 import { withRouter, Redirect } from 'react-router-dom';
 import { Button, FormGroup, Radio } from 'react-bootstrap';
 
-import { getQuestion, previousQuestion, nextQuestion } from '../../actions/questions';
+import { getQuestion, previousQuestion, nextQuestion, setAnswer } from '../../actions/questions';
 import GridBlock from '../../components/GridBlock';
 
 class Quiz extends Component {
   
   static defaultProps = {
     userId: false,
-    currentPage: 1
+    currentPage: 1,
+    questions: []
   }  
 
-  goToResults = () => {
-    this.props.history.push('/results');
+  goToResults = () => {    
+    var allQuestionsAnswered = true;
+    this.props.questions.forEach((question) => {
+      if(!question.user_answer) {
+        allQuestionsAnswered = false;        
+      }
+    });
+    if(allQuestionsAnswered) {
+      this.props.history.push('/results');
+    } else {
+      alert('Please fill in all the answers before finishing');
+    }    
+  }
+
+  answerQuestion = (event) => {
+    this.props.setAnswer(this.props.currentPage, event.target.value);    
   }
 
   questionsComponent(question) {
     return <span>
       <div>{question.question}</div>
-      <FormGroup>
+      <FormGroup onChange={this.answerQuestion}>
         {Object.keys(question.answers).map((answer, index) => {
-          return <Radio key={index} name="radioGroup">{question.answers[answer]}</Radio>;
+          let active = question.user_answer == index+1;
+          let fontWeight = active ? 600 : 400;
+          return <Radio key={index} value={index+1} readOnly checked={active} name="radioGroup"><span style={{fontWeight}}>{question.answers[answer]}</span></Radio>;
         })}
       </FormGroup>
     </span> 
@@ -32,6 +49,7 @@ class Quiz extends Component {
   footerComponent(currentPage) {
     return <span>
       {currentPage > 1 && <Button onClick={this.props.previousQuestion} bsStyle="primary" type="submit">Previous</Button>}
+      <span className={'page_indicator'}>{'Page '+currentPage}</span>
       {currentPage < 10 && <Button onClick={this.props.nextQuestion} bsStyle="primary" type="submit">Next</Button> }
       {currentPage == 10 && <Button onClick={this.goToResults} bsStyle="primary" type="submit">Finish</Button>}
     </span>
@@ -71,7 +89,8 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   getQuestion: bindActionCreators(getQuestion, dispatch), //questions already answered list
   previousQuestion: bindActionCreators(previousQuestion, dispatch), 
-  nextQuestion: bindActionCreators(nextQuestion, dispatch)
+  nextQuestion: bindActionCreators(nextQuestion, dispatch),
+  setAnswer: bindActionCreators(setAnswer, dispatch)
 })
   
 export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Quiz));

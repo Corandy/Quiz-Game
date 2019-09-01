@@ -6,16 +6,21 @@ const questionsReducerDefaultState = {
 export default (state = questionsReducerDefaultState, action) => {
   switch (action.type) {
     case 'SET_QUESTION':        
-        let questions = state.questions.slice();
-        let indexAlreadyExists = questions.length > action.page;
+        let newQuestions = state.questions.slice();
+        let indexAlreadyExists = newQuestions.length > action.page;
         if(!indexAlreadyExists) {
-            questions.push(action.question);            
+          newQuestions.push(action.question);            
         }      
-        return {...state, questions};
+        return {...state, questions: newQuestions};
     case 'SET_ANSWER':      
-        let questions2 = state.questions.slice();
-        questions2 = questions2.map((question, i) => {(i+1) === action.page ? {...question, answer: action.answer}: question});          
-        return {...state, questions2};
+        let questionsWithNewAnswer = state.questions.slice();
+        questionsWithNewAnswer = questionsWithNewAnswer.map((question, i) => {
+          if((i+1) === action.page) {
+            return {...question, user_answer: action.answer};
+          } 
+          return question;
+        });          
+        return {...state, questions: questionsWithNewAnswer};
     case 'NEXT_QUESTION':
         return {...state, currentPage: ++state.currentPage};
     case 'PREVIOUS_QUESTION':

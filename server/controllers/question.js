@@ -3,10 +3,10 @@ const path = require('path');
 
 const dataPath = path.join(__dirname,'../data');
 
-const takeRandomQuestion = function(resultArray, ignoreList) {
+const takeRandomQuestion = function(resultArray, ignoreList) {    
     var item = resultArray[Math.floor(Math.random()*resultArray.length)];
     if(ignoreList.includes(item.id)) {
-        return takeRandomQuestion(ignoreList);
+        return takeRandomQuestion(resultArray, ignoreList);
     } 
     return item;
 }
@@ -16,9 +16,8 @@ exports.getNewQuestion = function(req, res, next) {
 
     //get result data
     const resultArray = JSON.parse(fs.readFileSync(dataPath+'/questions.json', 'utf8'));
-    console.log(ignoreList.length);
     //only check if there are unanwsered questions left
-    if(resultArray.length > ignoreList.length) {
+    if(resultArray.length > ignoreList.length+1) {
         //get question that hasn't already answered
         const question = takeRandomQuestion(resultArray, ignoreList);
         //avoid user to see correct answer

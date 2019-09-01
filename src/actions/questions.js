@@ -35,3 +35,13 @@ export const previousQuestion = () => {
         });
     }
 };
+
+export const setAnswer = (page, answer) => {  
+    return function(dispatch) {
+        dispatch({
+          type: 'SET_ANSWER',
+          page,
+          answer
+        });
+    }
+};

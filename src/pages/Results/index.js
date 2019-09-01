@@ -16,7 +16,7 @@ class Results extends Component {
     userResults: {}
   }  
 
-  goToQuestions= () => {
+  goToQuestions= () => {    
     this.props.history.push('/');
   }
 

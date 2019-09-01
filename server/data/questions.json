@@ -1,21 +1,113 @@
 [
     {
         "id": 23,
-        "question": "How many socks?",
+        "question": "Where did The Flowerpot Men want to go in 1967?",
         "answers": {
-            "1": "2", 
-            "2": "5",
-            "3": "7"
+            "1": "New York", 
+            "2": "San Francisco",
+            "3": "Woodstock",
+            "4": "Memphis"
+        },
+        "correct_answer": 2
+    },{
+        "id": 66,
+        "question": "How many earths would fit inside the sun?",
+        "answers": {
+            "1": "circa 100", 
+            "2": "circa 1,000,000", 
+            "3": "circa 10,000",
+            "4": "circa 100,000"
+        },
+        "correct_answer": 2
+    },{
+        "id": 11,
+        "question": "Which actor appeared in the Cranberries music video Ridiculous Thought?",
+        "answers": {
+            "1": "Bruce Willis", 
+            "2": "Donald Sutherland", 
+            "3": "George Clooney",
+            "4": "Elijah Wood"
+        },
+        "correct_answer": 4
+    },{
+        "id": 24,
+        "question": "In which book is there an inn called Admiral Benbow?",
+        "answers": {
+            "1": "Lord of the Rings", 
+            "2": "Gulliver's Travels", 
+            "3": "Treasure Island",
+            "4": "Peter Pan"
+        },
+        "correct_answer": 3
+    },{
+        "id": 55,
+        "question": "What is the name of the man servant in 'Around the world in 80 days'?",
+        "answers": {
+            "1": "Pas Partout", 
+            "2": "Cato", 
+            "3": "Giles",
+            "4": "Machu Picchu"
         },
         "correct_answer": 1
     },{
         "id": 66,
-        "question": "Height of the Eifeltower",
+        "question": "In which film do the words 'I love you' save the planet earth?",
         "answers": {
-            "1": "200 meter", 
-            "2": "50 meter", 
-            "3": "70 meter"
+            "1": "The Day After Tomorrow", 
+            "2": "The 5th Element", 
+            "3": "Mars Attacks",
+            "4": "Independence Day"
         },
         "correct_answer": 2
+    },{
+        "id": 77,
+        "question": "'Goodbye Farewell and Amen' was the final episode of which TV series?",
+        "answers": {
+            "1": "MASH", 
+            "2": "Dallas", 
+            "3": "Friends",
+            "4": "The muppet show"
+        },
+        "correct_answer": 2
+    },{
+        "id": 88,
+        "question": "James Bond was searching for what kind of airplane in 'Thunderball'?",
+        "answers": {
+            "1": "707", 
+            "2": "Piper Cub", 
+            "3": "Vulkan",
+            "4": "B-52"
+        },
+        "correct_answer": 2
+    },{
+        "id": 9,
+        "question": "Which kind of animal did Florence Nightingale often carry around in her pocket?",
+        "answers": {
+            "1": "Kitten", 
+            "2": "Puppy", 
+            "3": "Owl",
+            "4": "Snake"
+        },
+        "correct_answer": 3
+    },{
+        "id": 1,
+        "question": "Who wrote 'don't count your chickens before they are hatched'?",
+        "answers": {
+            "1": "Aesop", 
+            "2": "Shakespeare", 
+            "3": "Ben Franklin",
+            "4": "Chaucer"
+        },
+        "correct_answer": 1
+    },{
+        "id": 3,
+        "question": "Which NHL hockey team has won the most Stanley Cups?",
+        "answers": {
+            "1": "Toronto Maple Leafs", 
+            "2": "Boston Bruins", 
+            "3": "Montreal Canadiens",
+            "4": "New York Rangers"
+        },
+        "correct_answer": 1
     }
 ]
