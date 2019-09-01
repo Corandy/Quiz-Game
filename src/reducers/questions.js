@@ -1,41 +1,25 @@
-import moment from 'moment';
-
-// Filters Reducer
-
-const filtersReducerDefaultState = {
-  text: '',
-  sortBy: 'date',
-  startDate: moment().startOf('month'),
-  endDate: moment().endOf('month')
+const questionsReducerDefaultState = {
+  currentPage: 1,
+  questions: []
 };
 
-export default (state = filtersReducerDefaultState, action) => {
+export default (state = questionsReducerDefaultState, action) => {
   switch (action.type) {
-    case 'SET_TEXT_FILTER':
-      return {
-        ...state,
-        text: action.text
-      };
-    case 'SORT_BY_AMOUNT':
-      return {
-        ...state,
-        sortBy: 'amount'
-      };
-    case 'SORT_BY_DATE':
-      return {
-        ...state,
-        sortBy: 'date'
-      };
-    case 'SET_START_DATE':
-      return {
-        ...state,
-        startDate: action.startDate
-      };
-    case 'SET_END_DATE':
-      return {
-        ...state,
-        endDate: action.endDate
-      };
+    case 'SET_QUESTION':        
+        let questions = state.questions.slice();
+        let indexAlreadyExists = questions.length > action.page;
+        if(!indexAlreadyExists) {
+            questions.push(action.question);            
+        }      
+        return {...state, questions};
+    case 'SET_ANSWER':      
+        let questions2 = state.questions.slice();
+        questions2 = questions2.map((question, i) => {(i+1) === action.page ? {...question, answer: action.answer}: question});          
+        return {...state, questions2};
+    case 'NEXT_QUESTION':
+        return {...state, currentPage: ++state.currentPage};
+    case 'PREVIOUS_QUESTION':
+        return {...state, currentPage: --state.currentPage};
     default:
       return state;
   }

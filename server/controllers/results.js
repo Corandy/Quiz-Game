@@ -6,14 +6,14 @@ const dataPath = path.join(__dirname,'../data');
 
 checkIfUserAlreadyExistsBasedOnUserId = function(userId) {
     //get results data
-    const resultArray = JSON.parse(fs.readFileSync(dataPath+'/results.json', 'utf8'));
+    const resultsArray = JSON.parse(fs.readFileSync(dataPath+'/results.json', 'utf8'));
 
     //check if user already exist
-    resultArray.forEach(function(results) {
-        if(results.userId === userId) {
+    for (var i = 0; i < resultsArray.length; ++i) {
+        if(resultsArray[i].userId === userId) {
             return true;
         }
-    });
+    }
     return false;
 }
 
@@ -33,26 +33,25 @@ exports.verifyUserBasedOnEmail = function(req, res, next) {
 
 exports.showAllResults = function(req, res, next) {
     //get results data
-    const resultArray = JSON.parse(fs.readFileSync(dataPath+'/results.json', 'utf8'));
+    const resultsArray = JSON.parse(fs.readFileSync(dataPath+'/results.json', 'utf8'));
 
     //send to client
-    return res.send(JSON.stringify(resultArray));
+    return res.send(JSON.stringify(resultsArray));
 }
 
 
 exports.showResultsOfSpecificUser = function(req, res, next) {
     const userId = req.params.userId;
-    console.log(userId);
 
     //get results data
-    const resultArray = JSON.parse(fs.readFileSync(dataPath+'/results.json', 'utf8'));
+    const resultsArray = JSON.parse(fs.readFileSync(dataPath+'/results.json', 'utf8'));
 
     //find specific results
-    resultArray.forEach(function(results) {
-        if(results.userId === userId) {
-            return res.send(JSON.stringify(results));
+    for (var i = 0; i < resultsArray.length; ++i) {
+        if(resultsArray[i].userId === userId) {
+            return res.send(JSON.stringify(resultsArray[i]));
         }
-    });
+    }
 
     //if not found send error code to client
     return res.send('Not found');
@@ -68,10 +67,10 @@ exports.saveResultOfUser = function(req, res, next) {
     } else {
         const newResults = req.body.results;
         //get old results data and push new data to it
-        var resultArray = JSON.parse(fs.readFileSync(dataPath+'/results.json', 'utf8'));
-        resultArray.push(newResults);
+        var resultsArray = JSON.parse(fs.readFileSync(dataPath+'/results.json', 'utf8'));
+        resultsArray.push(newResults);
         //save the local file on server
-        fs.writeFile(dataPath+'/results.json', resultArray, function(err) {
+        fs.writeFile(dataPath+'/results.json', resultsArray, function(err) {
             if(err) {
                 return console.log(err);
             }        

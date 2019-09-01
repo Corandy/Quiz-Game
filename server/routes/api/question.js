@@ -1,6 +1,6 @@
 var router = require('express').Router();
 var questionController = require('../../controllers/question');
 
-router.get('/', questionController.getNewQuestion);
+router.post('/', questionController.getNewQuestion);
 
 module.exports = router;

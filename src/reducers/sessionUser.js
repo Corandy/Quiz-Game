@@ -1,10 +1,8 @@
-// Expenses Reducer
-
-const userReducerDefaultState = {
+const sessionUserReducerDefaultState = {
   userId: false
 };
 
-export default (state = userReducerDefaultState, action) => {
+export default (state = sessionUserReducerDefaultState, action) => {
   switch (action.type) {
     case 'FILL_USER_ID':
       return {userId: action.userId}

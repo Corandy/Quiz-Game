@@ -12,11 +12,11 @@ const takeRandomQuestion = function(resultArray, ignoreList) {
 }
 
 exports.getNewQuestion = function(req, res, next) {
-    const ignoreList = req.body.alreadyQuestioned ? req.body.alreadyQuestioned : [];
+    const ignoreList = req.body.alreadyQuestioned ? JSON.parse(req.body.alreadyQuestioned) : [];
 
     //get result data
     const resultArray = JSON.parse(fs.readFileSync(dataPath+'/questions.json', 'utf8'));
-
+    console.log(ignoreList.length);
     //only check if there are unanwsered questions left
     if(resultArray.length > ignoreList.length) {
         //get question that hasn't already answered
