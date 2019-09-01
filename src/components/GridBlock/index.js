@@ -14,19 +14,19 @@ class GridBlock extends Component {
         return ( 
             <div className={"col-md-"+this.props.colSize+' '+centerClassName}>
                 <div className="card">
-                <div className="header">
-                {this.props.header}
-                </div>
-                {!!this.props.content &&
-                    <div className="content">
-                        {this.props.content}
+                    <div className="header">
+                    {this.props.header}
                     </div>
-                }
-                {!!this.props.footer &&
-                    <div className="footer">
-                        {this.props.footer}
-                    </div>
-                }
+                    {!!this.props.content &&
+                        <div className="content">
+                            {this.props.content}
+                        </div>
+                    }
+                    {!!this.props.footer &&
+                        <div className="footer">
+                            {this.props.footer}
+                        </div>
+                    }
                 </div>     
             </div>  
         )

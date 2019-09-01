@@ -1,28 +1,13 @@
 var router = require('express').Router();
+var resultsController = require('../../controllers/results');
 
-router.get('/', function(req, res, next){
-  res.send('GET RESULTS');
-});
+//save results
+router.post('/', resultsController.saveResultOfUser);  
 
-router.post('/', function(req, res, next){
-    res.send('POST RESULTS');
-});  
+//load all results
+router.get('/', resultsController.showAllResults);
 
-router.get('/:userId?', loadUser, function(req, res, next){
-    if(req.user){
-        res.send('GET RESULTS OF ' + req.user);
-    } else {
-        res.send('GET RESULTS OF USER FAIL');
-    }
-});
-
-function loadUser(req, res, next) {
-    if (req.params.userId == 2) {
-        req.user = 'PIET';
-        next();
-    } else {
-        next(new Error("Couldn't find user: "));
-    }
-  }
+//load specific result
+router.get('/:userId?', resultsController.showResultsOfSpecificUser);
 
 module.exports = router;
