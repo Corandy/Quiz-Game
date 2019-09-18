@@ -1,6 +1,6 @@
 const sessionUserReducerDefaultState = {
-  userId: '098ab82b-4881-3108-a67a-259cb3dc6009',
-  userMail: 'tijntje_226_91@hotmail.com'
+  userId: false,
+  userMail: false
 };
 
 export default (state = sessionUserReducerDefaultState, action) => {

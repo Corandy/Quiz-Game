@@ -16,8 +16,10 @@ const LeaderBoardComponent = ({
         </thead>
         <tbody>
           {list.map((result, index) => {
-          let username = result.userId === userId ? userMail : 'player '+(index+1);
-          return <tr key={index}>
+          let thisUser = result.userId === userId;
+          let username = thisUser ? userMail : 'player '+(index+1);
+          let thisUserStyle = thisUser ? 'bold' : 400;
+          return <tr style={{fontWeight:thisUserStyle}} key={index}>
             <td>{(index+1)}</td>
             <td>{username}</td>
             <td>{result.score*10}</td>

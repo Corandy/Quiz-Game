@@ -56,7 +56,7 @@ class Leaderboard extends Component {
 
 const mapStateToProps = (state) => ({
     userId: state.sessionUser.userId,
-    userMail: state.sessionUser.email,
+    userMail: state.sessionUser.userMail,
     allResults: state.results.results
 })
 

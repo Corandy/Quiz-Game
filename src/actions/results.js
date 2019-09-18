@@ -32,10 +32,10 @@ export const getUserResults = (userId) => {
 
   export const sendResults = (userId = false, results = []) => {
     let answers = [];
-    for(var a=0; a < results.length; a++) {
+    for(var i=0; i < results.length; i++) {
       let answer = {};
-      answer.id = results.id;
-      answer.answer = results.user_answer;
+      answer.id = results[i].id;
+      answer.answer = results[i].user_answer;
       answers.push(answer);
     }
     return function(dispatch) {

@@ -21,5 +21,5 @@ export const loginByMailAddress = (email = false) => {
 };
 
 export const removeUserId = () => ({
-  type: 'REMOVE_USER_ID'
+  type: 'REMOVE_USER'
 });

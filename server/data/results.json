@@ -1,34 +1,69 @@
-[
-    {
-        "userId" : "7d806dc6-2ad2-3daa-b50c-9619a7388e3b",
-        "results" : [
-            {
-                "id": 23,
-                "answer": 3,
-                "goodAnswer": false
-            },
-            {
-                "id": 55,
-                "answer": 1,
-                "goodAnswer": true
-            }
-        ],
-        "score" : 10
-    },
-    {
-        "userId" : "a3246d0c-a241-3045-8e14-a7b0c666b96a",
-        "results" : [
-            {
-                "id": 23,
-                "answer": 3,
-                "goodAnswer": false
-            },
-            {
-                "id": 55,
-                "answer": 1,
-                "goodAnswer": true
-            }
-        ],
-        "score" : 10
-    }
-]
+[{
+	"userId": "7d806dc6-2ad2-3daa-b50c-9619a7388e3b",
+	"results": [{
+		"id": 23,
+		"answer": 3,
+		"correctAnswer": 1
+	}, {
+		"id": 55,
+		"answer": 1,
+		"correctAnswer": 1
+	}],
+	"score": 1
+}, {
+	"userId": "a3246d0c-a241-3045-8e14-a7b0c666b96a",
+	"results": [{
+		"id": 23,
+		"answer": 3,
+		"correctAnswer": 1
+	}, {
+		"id": 55,
+		"answer": 1,
+		"correctAnswer": 1
+	}],
+	"score": 1
+}, {
+	"userId": "098ab82b-4881-3108-a67a-259cb3dc6009",
+	"results": [{
+		"id": 88,
+		"answer": "2",
+		"correctAnswer": 2
+	}, {
+		"id": 24,
+		"answer": "2",
+		"correctAnswer": 3
+	}, {
+		"id": 77,
+		"answer": "2",
+		"correctAnswer": 2
+	}, {
+		"id": 11,
+		"answer": "3",
+		"correctAnswer": 4
+	}, {
+		"id": 23,
+		"answer": "2",
+		"correctAnswer": 2
+	}, {
+		"id": 66,
+		"answer": "2",
+		"correctAnswer": 2
+	}, {
+		"id": 9,
+		"answer": "1",
+		"correctAnswer": 3
+	}, {
+		"id": 55,
+		"answer": "2",
+		"correctAnswer": 1
+	}, {
+		"id": 1,
+		"answer": "3",
+		"correctAnswer": 1
+	}, {
+		"id": 3,
+		"answer": "3",
+		"correctAnswer": 1
+	}],
+	"score": 4
+}]

@@ -40,7 +40,7 @@ validateAnswer = function(answer, questions) {
             break;
         }
     }
-    let correct = newAnswer.correctAnswer === newAnswer.answer;
+    let correct = newAnswer.correctAnswer && newAnswer.correctAnswer == newAnswer.answer;
     return [correct, newAnswer]
 }
 
@@ -63,10 +63,14 @@ exports.showAllResults = function(req, res, next) {
     const resultsArray = JSON.parse(fs.readFileSync(dataPath+'/results.json', 'utf8'));
 
     //sort based on score
-    resultsArray.sort((a, b) => (a.score > b.score) ? 1 : -1)
+    const sortedArray = [...resultsArray].sort((a, b) => {
+        if (a.score < b.score) return 1;
+        if (a.score > b.score) return -1;
+        return 0;
+    });
 
     //send to client
-    return res.send(JSON.stringify(resultsArray));
+    return res.send(JSON.stringify(sortedArray));
 }
 
 exports.showResultsOfSpecificUser = function(req, res, next) {
@@ -76,13 +80,17 @@ exports.showResultsOfSpecificUser = function(req, res, next) {
     const resultsArray = JSON.parse(fs.readFileSync(dataPath+'/results.json', 'utf8'));
 
     //sort based on score
-    resultsArray.sort((a, b) => (a.score > b.score) ? 1 : -1)
+    const sortedArray = [...resultsArray].sort((a, b) => {
+        if (a.score < b.score) return 1;
+        if (a.score > b.score) return -1;
+        return 0;
+    });
 
     //find specific results
     let userResults = false;
-    for (var i = 0; i < resultsArray.length; i++) {
-        if(resultsArray[i].userId === userId) {
-            userResults = resultsArray[i];
+    for (var i = 0; i < sortedArray.length; i++) {
+        if(sortedArray[i].userId === userId) {
+            userResults = sortedArray[i];
             userResults.ranking = (i+1);
             break;            
         }
@@ -116,8 +124,8 @@ exports.saveResultOfUser = function(req, res, next) {
 
         results.userId = userId;
         results.results = [];
-
-        //get question data
+ 
+        //get question data to compare
         const questionArray = JSON.parse(fs.readFileSync(dataPath+'/questions.json', 'utf8'));
         for (var i = 0; i < answers.length; i++) {
             let validate = validateAnswer(answers[i], questionArray); 
@@ -132,7 +140,7 @@ exports.saveResultOfUser = function(req, res, next) {
         resultsArray.push(results);
         console.log(resultsArray);
         //save the local file on server
-        fs.writeFile(dataPath+'/results.json', resultsArray, function(err) {
+        fs.writeFile(dataPath+'/results.json', JSON.stringify(resultsArray), function(err) {
             if(err) {
                 return console.log(err);
             }        

@@ -9,9 +9,9 @@ const ResultsComponent = ({
     }) => {
     return <span>
         <div className={'result_score'}>Score: {results.score*10}</div>
-        <div className={'result_ranking'}>Ranking: {ordinal_suffix_of(results.score)}</div>
+        <div className={'result_ranking'}>Ranking: {ordinal_suffix_of(results.ranking)}</div>
         {results.results.map((result, index) => {
-            let correct = result.answer === result.correctAnswer;
+            let correct = result.answer == result.correctAnswer;
             let answerStyle = correct ? 'correct' : 'wrong'; 
             return <div key={index} className={"result_container"}>
                 <div className="result_container__question">{result.questionText}</div>
