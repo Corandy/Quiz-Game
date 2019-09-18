@@ -6,7 +6,7 @@ ShallowWrapper {
   Symbol(enzyme.__unrendered__): <ButtonBar
     currentPage={1}
     min={1}
-/>,
+  />,
   Symbol(enzyme.__renderer__): Object {
     "batchedUpdates": [Function],
     "checkPropTypes": [Function],
@@ -25,9 +25,9 @@ ShallowWrapper {
         false,
         <span
           className="page_indicator"
->
+        >
           Page 1
-</span>,
+        </span>,
         false,
         false,
       ],
@@ -62,9 +62,9 @@ ShallowWrapper {
           false,
           <span
             className="page_indicator"
->
+          >
             Page 1
-</span>,
+          </span>,
           false,
           false,
         ],
