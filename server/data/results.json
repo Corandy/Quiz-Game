@@ -12,7 +12,8 @@
                 "answer": 1,
                 "goodAnswer": true
             }
-        ]
+        ],
+        "score" : 10
     },
     {
         "userId" : "a3246d0c-a241-3045-8e14-a7b0c666b96a",
@@ -27,6 +28,7 @@
                 "answer": 1,
                 "goodAnswer": true
             }
-        ]
+        ],
+        "score" : 10
     }
 ]

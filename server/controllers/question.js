@@ -5,6 +5,7 @@ const dataPath = path.join(__dirname,'../data');
 
 const takeRandomQuestion = function(resultArray, ignoreList) {    
     var item = resultArray[Math.floor(Math.random()*resultArray.length)];
+    //check if question is already asked, if so try other question
     if(ignoreList.includes(item.id)) {
         return takeRandomQuestion(resultArray, ignoreList);
     } 

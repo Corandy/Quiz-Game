@@ -5,9 +5,9 @@
   "author": "Martijn Hoogers",
   "license": "MIT",
   "scripts": {
-    "build": "webpack",
-    "dev-server": "webpack-dev-server",
-    "live": "node server.js",
+    "build-fe": "webpack",
+    "fe-dev-server": "webpack-dev-server",
+    "node-live": "node server.js",
     "test": "jest"
   },
   "dependencies": {

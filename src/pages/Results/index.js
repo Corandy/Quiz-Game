@@ -4,40 +4,51 @@ import { bindActionCreators } from 'redux'
 import { withRouter, Redirect } from 'react-router-dom';
 import { Button } from 'react-bootstrap';
 
-import { getUserSpecificResults, getAllResults } from '../../actions/results';
+import { getUserResults } from '../../actions/results';
 import { removeUserId } from '../../actions/sessionUser';
 import GridBlock from '../../components/GridBlock';
+import ResultsComponent from '../../components/ResultsComponent';
 
 class Results extends Component {
   
   static defaultProps = {
     userId: false,
-    allResults: [],
     userResults: {}
   }  
 
-  goToQuestions= () => {    
+  goToQuestionsEvent = () => {    
     this.props.history.push('/');
   }
 
+  goToLeaderBoardEvent = () => {
+    this.props.history.push('/leaderboard');
+  }
+
   resultsComponent() {    
-    return <span></span> 
+    const { userId, userResults, getUserResultsDispatch} = this.props;
+    //if question is not already loaded for this page, call get question dispatch
+    if(!userResults.userId) {
+      getUserResultsDispatch(userId); 
+      return false;
+    } else {    
+      return <ResultsComponent results={userResults}/>;
+    }
   }
 
   footerComponent() {
     return <span>
-      <Button onClick={this.props.goToQuestions} bsStyle="primary" type="submit">Go back to Questions</Button>
-      <Button onClick={this.props.removeUserId} bsStyle="primary" type="submit">Restart</Button> 
+      <Button onClick={this.goToLeaderBoardEvent} bsStyle="primary" type="submit" style={{marginRight: '8px'}}>Check the Leaderboard</Button>
+      <Button onClick={this.props.removeUserIdDispatch} bsStyle="primary" type="submit">Restart</Button> 
     </span>
   }
 
   render() {
-    const {userId, allResults, userResults} = this.props;
+    const {userId} = this.props;
     if(!userId) {
         return <Redirect to='/login'/>
     } else {
       let headerContent = <h4 className="title">Your Results</h4>;
-      let resultsContent = this.resultsComponent(results);
+      let resultsContent = this.resultsComponent();
       let footerContent = this.footerComponent();
       return (
         <div className="container-fluid">       
@@ -52,14 +63,12 @@ class Results extends Component {
 
 const mapStateToProps = (state) => ({
     userId: state.sessionUser.userId,
-    allResults: state.results.results,
-    userResults: state.results.userSessionsResults
+    userResults: state.results.userResults
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  getUserSpecificResults: bindActionCreators(getUserSpecificResults, dispatch), //userId
-  getAllResults: bindActionCreators(getAllResults, dispatch), 
-  removeUserId: bindActionCreators(removeUserId, dispatch)
+  getUserResultsDispatch: bindActionCreators(getUserResults, dispatch), //userId
+  removeUserIdDispatch: bindActionCreators(removeUserId, dispatch)
 })
   
 export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Results));

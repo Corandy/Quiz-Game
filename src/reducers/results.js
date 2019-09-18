@@ -1,14 +1,14 @@
 const resultsReducerDefaultState = {
-    results: [],
-    userSessionsResults: {}
+    userResults: [],
+    results: []
 };
   
   export default (state = resultsReducerDefaultState, action) => {
     switch (action.type) {
-      case 'SET_RESULTS':          
+      case 'SET_USER_RESULTS':          
+          return {...state, userResults: action.userResults};
+      case 'SET_ALL_RESULTS':          
           return {...state, results: action.results};
-      case 'SET_SPECIFIC_RESULTS':
-        return {...state, userSessionsResults: action.results};      
       default:
         return state;
     }

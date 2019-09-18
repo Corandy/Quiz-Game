@@ -1,0 +1,26 @@
+.result_score {
+    font-size: 17px;
+}
+
+.result_ranking {
+    font-size: 17px;
+    margin-bottom: 12px;
+}
+
+.result_container {
+    margin-bottom: 8px;   
+}
+
+.result_container__question {
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.result_container__answer--correct {
+    color: #00aa00;
+}
+
+.result_container__answer--wrong {
+    color: #aa0000;
+}
+

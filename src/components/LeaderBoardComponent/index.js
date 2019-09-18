@@ -1,0 +1,30 @@
+import React from 'react';
+import { Table } from 'react-bootstrap';
+
+const LeaderBoardComponent = ({
+        list = [], //list with items with propety userId and score
+        userId = false, //string or false
+        userMail = false //string or false
+    }) => {
+    return <Table bordered hover>
+        <thead>
+          <tr>
+            <th>Rank</th>
+            <th>User Name</th>
+            <th>Score</th>
+          </tr>
+        </thead>
+        <tbody>
+          {list.map((result, index) => {
+          let username = result.userId === userId ? userMail : 'player '+(index+1);
+          return <tr key={index}>
+            <td>{(index+1)}</td>
+            <td>{username}</td>
+            <td>{result.score*10}</td>
+          </tr>
+        })}
+       </tbody>
+    </Table>
+}
+
+export default LeaderBoardComponent;

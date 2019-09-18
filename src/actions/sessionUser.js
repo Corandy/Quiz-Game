@@ -8,8 +8,9 @@ export const loginByMailAddress = (email = false) => {
         throw ('Already used');
       }
       dispatch({
-        type: 'FILL_USER_ID',
-        userId: res.data
+        type: 'FILL_USER',
+        userId: res.data,
+        email: email
       });
       return true;     
     }).catch(err => {

@@ -6,4 +6,7 @@
 @import './base/bootstrap/footer';
 @import './base/bootstrap/navbar';
 
+@import '../../components/ProgressBar/ProgressBar';
+@import '../../components/ResultsComponent/ResultsComponent';
+
 @import '../../pages/Quiz/Quiz';

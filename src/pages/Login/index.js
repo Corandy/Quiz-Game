@@ -20,7 +20,7 @@ class Login extends Component {
     }
 
     this.props.loginByMailAddress(value).then(res => {
-      alert('success');
+      console.log('success');
     }).catch(error =>{
       alert(error);
     });

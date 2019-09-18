@@ -32,3 +32,8 @@ button:disabled {
   height: 100vh;
   background-color: #FAFCFE;
 }
+
+.flex-break {
+  flex-basis: 100%;
+  height: 0;
+}

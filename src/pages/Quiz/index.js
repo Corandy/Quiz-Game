@@ -2,10 +2,13 @@ import React, { Component } from 'react';
 import { connect,  } from 'react-redux';
 import { bindActionCreators } from 'redux'
 import { withRouter, Redirect } from 'react-router-dom';
-import { Button, FormGroup, Radio } from 'react-bootstrap';
 
 import { getQuestion, previousQuestion, nextQuestion, setAnswer } from '../../actions/questions';
+import { sendResults } from '../../actions/results';
+import ButtonBar from '../../components/ButtonBar';
 import GridBlock from '../../components/GridBlock';
+import ProgressBar from '../../components/ProgressBar';
+import QuestionComponent from '../../components/QuestionComponent';
 
 class Quiz extends Component {
   
@@ -15,60 +18,59 @@ class Quiz extends Component {
     questions: []
   }  
 
-  goToResults = () => {    
+  //if all is filled go to result otherwise warning
+  goToResultsEvent = () => {   
+    const {userId, questions} = this.props;
     var allQuestionsAnswered = true;
-    this.props.questions.forEach((question) => {
+    questions.forEach((question) => {
       if(!question.user_answer) {
         allQuestionsAnswered = false;        
       }
     });
-    if(allQuestionsAnswered) {
-      this.props.history.push('/results');
+    if(allQuestionsAnswered) {      
+      this.props.sendResultsDispatch(userId, questions).then(res => {
+        alert('success');
+        this.props.history.push('/results');
+      }).catch(error =>{
+        alert(error);
+      });      
     } else {
       alert('Please fill in all the answers before finishing');
     }    
   }
-
-  answerQuestion = (event) => {
-    this.props.setAnswer(this.props.currentPage, event.target.value);    
+  
+  answerQuestionEvent = (event) => {
+    this.props.setAnswerDispatch(this.props.currentPage, event.target.value);    
   }
 
-  questionsComponent(question) {
-    return <span>
-      <div>{question.question}</div>
-      <FormGroup onChange={this.answerQuestion}>
-        {Object.keys(question.answers).map((answer, index) => {
-          let active = question.user_answer == index+1;
-          let fontWeight = active ? 600 : 400;
-          return <Radio key={index} value={index+1} readOnly checked={active} name="radioGroup"><span style={{fontWeight}}>{question.answers[answer]}</span></Radio>;
-        })}
-      </FormGroup>
-    </span> 
+  questionComponent() {
+    const { questions, currentPage, getQuestionDispatch} = this.props;
+    //if question is not already loaded for this page, call get question dispatch
+    if(!questions[currentPage-1]) {
+      getQuestionDispatch(questions); 
+      return false;
+    } else {    
+      return <QuestionComponent question={questions[currentPage-1]} onChangeEvent={this.answerQuestionEvent}/>;
+    }
   }
 
   footerComponent(currentPage) {
-    return <span>
-      {currentPage > 1 && <Button onClick={this.props.previousQuestion} bsStyle="primary" type="submit">Previous</Button>}
-      <span className={'page_indicator'}>{'Page '+currentPage}</span>
-      {currentPage < 10 && <Button onClick={this.props.nextQuestion} bsStyle="primary" type="submit">Next</Button> }
-      {currentPage == 10 && <Button onClick={this.goToResults} bsStyle="primary" type="submit">Finish</Button>}
-    </span>
+    const {questions, previousQuestionDispatch, nextQuestionDispatch} = this.props;
+    return <React.Fragment>
+      <ProgressBar currentPage={currentPage} list={questions} propertyFilled={'user_answer'} max={10}/>
+      <div className={"flex-break"}></div> 
+      <ButtonBar currentPage={currentPage} min={1} max={10} previousEvent={previousQuestionDispatch} nextEvent={nextQuestionDispatch} finishEvent={this.goToResultsEvent}/>
+    </React.Fragment>;
   }
 
   render() {
-    const {userId, questions, currentPage, getQuestion} = this.props;
+    const {userId, currentPage} = this.props;
     if(!userId) {
         return <Redirect to='/login'/>
     } else {
       let headerContent = <h4 className="title">Quiz</h4>;
-      let questionContent;
-      let footerContent;
-      if(!questions[currentPage-1]) {
-        getQuestion(questions); 
-      } else {      
-        questionContent = this.questionsComponent(questions[currentPage-1]);
-        footerContent = this.footerComponent(currentPage);
-      }
+      let questionContent = this.questionComponent(currentPage)
+      let footerContent = this.footerComponent(currentPage);
       return (
         <div className="container-fluid">       
             <div className="row">
@@ -81,16 +83,17 @@ class Quiz extends Component {
 };
 
 const mapStateToProps = (state) => ({
-    userId: true,//state.sessionUser.userId    
+    userId: state.sessionUser.userId,    
     currentPage: state.questions.currentPage,
     questions: state.questions.questions
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  getQuestion: bindActionCreators(getQuestion, dispatch), //questions already answered list
-  previousQuestion: bindActionCreators(previousQuestion, dispatch), 
-  nextQuestion: bindActionCreators(nextQuestion, dispatch),
-  setAnswer: bindActionCreators(setAnswer, dispatch)
+  getQuestionDispatch: bindActionCreators(getQuestion, dispatch), //questions already answered list
+  previousQuestionDispatch: bindActionCreators(previousQuestion, dispatch), 
+  nextQuestionDispatch: bindActionCreators(nextQuestion, dispatch),
+  setAnswerDispatch: bindActionCreators(setAnswer, dispatch),
+  sendResultsDispatch: bindActionCreators(sendResults, dispatch) //userId, results
 })
   
 export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Quiz));
