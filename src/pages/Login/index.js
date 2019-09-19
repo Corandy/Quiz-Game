@@ -30,11 +30,7 @@ class Login extends Component {
     let headerContent = <h4 className="title">Login</h4>; 
     let contentContent = <span>
       <form onSubmit={this.checkMail}>
-        <FieldGroup
-          type="email"
-          label="Email address"
-          placeholder="Enter email"
-        />
+        <FieldGroup type="email" label="Email address" placeholder="Enter email"/>
         <Button bsStyle="primary" type="submit">Login</Button>
       </form>      
     </span>;
@@ -59,7 +55,7 @@ class Login extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  userId: state.sessionUser.userId    
+  userId: state.get('sessionUser').get('userId') 
 })
 
 const mapDispatchToProps = (dispatch) => ({

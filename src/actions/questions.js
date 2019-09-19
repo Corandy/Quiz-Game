@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-export const getQuestion = (alreadyQuestioned = []) => {  
+export const getQuestion = (alreadyQuestioned = []) => { 
   alreadyQuestioned = alreadyQuestioned.length > 0 ? alreadyQuestioned.map((question) => question.id) : alreadyQuestioned;
   return function(dispatch) {
     return axios.post(`http://localhost:3000/api/question`, {alreadyQuestioned: JSON.stringify(alreadyQuestioned)})
@@ -14,7 +14,6 @@ export const getQuestion = (alreadyQuestioned = []) => {
       });
       return true;     
     }).catch(err => {
-      err = err == 'no questions left' ? 'No questions left' : 'Something went wrong, please try again';
       throw (err);
     });
   }

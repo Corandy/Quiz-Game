@@ -10,7 +10,7 @@ export const loginByMailAddress = (email = false) => {
       dispatch({
         type: 'FILL_USER',
         userId: res.data,
-        email: email
+        userMail: email
       });
       return true;     
     }).catch(err => {

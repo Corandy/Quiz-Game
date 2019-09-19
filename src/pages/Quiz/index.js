@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect,  } from 'react-redux';
 import { bindActionCreators } from 'redux'
 import { withRouter, Redirect } from 'react-router-dom';
+import Immutable from 'immutable';
 
 import { getQuestion, previousQuestion, nextQuestion, setAnswer } from '../../actions/questions';
 import { sendResults } from '../../actions/results';
@@ -15,7 +16,7 @@ class Quiz extends Component {
   static defaultProps = {
     userId: false,
     currentPage: 1,
-    questions: []
+    questions: Immutable.List()
   }  
 
   //if all is filled go to result otherwise warning
@@ -23,12 +24,12 @@ class Quiz extends Component {
     const {userId, questions} = this.props;
     var allQuestionsAnswered = true;
     questions.forEach((question) => {
-      if(!question.user_answer) {
+      if(!question.get('user_answer')) {
         allQuestionsAnswered = false;        
       }
     });
     if(allQuestionsAnswered) {      
-      this.props.sendResultsDispatch(userId, questions).then(res => {
+      this.props.sendResultsDispatch(userId, questions.toJS()).then(res => {
         alert('success');
         this.props.history.push('/results');
       }).catch(error =>{
@@ -46,18 +47,19 @@ class Quiz extends Component {
   questionComponent() {
     const { questions, currentPage, getQuestionDispatch} = this.props;
     //if question is not already loaded for this page, call get question dispatch
-    if(!questions[currentPage-1]) {
-      getQuestionDispatch(questions); 
+    if(!questions.get(currentPage-1)) {
+      getQuestionDispatch(questions.toJS()); 
       return false;
     } else {    
-      return <QuestionComponent question={questions[currentPage-1]} onChangeEvent={this.answerQuestionEvent}/>;
+      let showedQuestions = questions.get(currentPage-1).toJS();
+      return <QuestionComponent question={showedQuestions} onChangeEvent={this.answerQuestionEvent}/>;
     }
   }
 
   footerComponent(currentPage) {
     const {questions, previousQuestionDispatch, nextQuestionDispatch} = this.props;
     return <React.Fragment>
-      <ProgressBar currentPage={currentPage} list={questions} propertyFilled={'user_answer'} max={10}/>
+      <ProgressBar currentPage={currentPage} list={questions.toJS()} propertyFilled={'user_answer'} max={10}/>
       <div className={"flex-break"}></div> 
       <ButtonBar currentPage={currentPage} min={1} max={10} previousEvent={previousQuestionDispatch} nextEvent={nextQuestionDispatch} finishEvent={this.goToResultsEvent}/>
     </React.Fragment>;
@@ -83,9 +85,9 @@ class Quiz extends Component {
 };
 
 const mapStateToProps = (state) => ({
-    userId: state.sessionUser.userId,    
-    currentPage: state.questions.currentPage,
-    questions: state.questions.questions
+    userId: state.get('sessionUser').get('userId'),    
+    currentPage: state.get('questions').get('currentPage'),
+    questions: state.get('questions').get('questions')
 })
 
 const mapDispatchToProps = (dispatch) => ({

@@ -8,12 +8,13 @@ import { getUserResults } from '../../actions/results';
 import { removeUserId } from '../../actions/sessionUser';
 import GridBlock from '../../components/GridBlock';
 import ResultsComponent from '../../components/ResultsComponent';
+import Immutable from 'immutable';
 
 class Results extends Component {
   
   static defaultProps = {
     userId: false,
-    userResults: {}
+    userResults: Immutable.List()
   }  
 
   goToQuestionsEvent = () => {    
@@ -27,11 +28,11 @@ class Results extends Component {
   resultsComponent() {    
     const { userId, userResults, getUserResultsDispatch} = this.props;
     //if question is not already loaded for this page, call get question dispatch
-    if(!userResults.userId) {
+    if(!userResults.get('userId')) {
       getUserResultsDispatch(userId); 
       return false;
     } else {    
-      return <ResultsComponent results={userResults}/>;
+      return <ResultsComponent results={userResults.toJS()}/>;
     }
   }
 
@@ -62,8 +63,8 @@ class Results extends Component {
 };
 
 const mapStateToProps = (state) => ({
-    userId: state.sessionUser.userId,
-    userResults: state.results.userResults
+  userId: state.get('sessionUser').get('userId'),
+  userResults: state.get('results').get('userResults')
 })
 
 const mapDispatchToProps = (dispatch) => ({

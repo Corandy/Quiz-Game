@@ -7,12 +7,14 @@ import { Button } from 'react-bootstrap';
 import { getAllResults } from '../../actions/results';
 import GridBlock from '../../components/GridBlock';
 import LeaderBoardComponent from '../../components/LeaderBoardComponent';
+import Immutable from 'immutable';
 
 class Leaderboard extends Component {
   
   static defaultProps = {
     userId: false,
-    allResults: []
+    userMail: false,
+    allResults: Immutable.List()
   }  
 
   goToResultsEvent = () => {    
@@ -21,11 +23,11 @@ class Leaderboard extends Component {
 
   leaderBoardComponent() {  
     const { allResults, getAllResultsDispatch, userId, userMail } = this.props;  
-    if(!allResults.length) {
+    if(!allResults.size) {
       getAllResultsDispatch(); 
       return false;
     } else {    
-      return <LeaderBoardComponent list={allResults} userId={userId} userMail={userMail}/>
+      return <LeaderBoardComponent list={allResults.toJS()} userId={userId} userMail={userMail}/>
     }    
   }
 
@@ -55,9 +57,9 @@ class Leaderboard extends Component {
 };
 
 const mapStateToProps = (state) => ({
-    userId: state.sessionUser.userId,
-    userMail: state.sessionUser.userMail,
-    allResults: state.results.results
+    userId: state.get('sessionUser').get('userId'),
+    userMail: state.get('sessionUser').get('userMail'),
+    allResults: state.get('results').get('results')
 })
 
 const mapDispatchToProps = (dispatch) => ({
