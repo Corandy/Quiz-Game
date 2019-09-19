@@ -138,7 +138,7 @@ exports.saveResultOfUser = function(req, res, next) {
         //get old results data and push new data to it
         var resultsArray = JSON.parse(fs.readFileSync(dataPath+'/results.json', 'utf8'));
         resultsArray.push(results);
-        console.log(resultsArray);
+
         //save the local file on server
         fs.writeFile(dataPath+'/results.json', JSON.stringify(resultsArray), function(err) {
             if(err) {

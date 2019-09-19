@@ -30,7 +30,7 @@ class Quiz extends Component {
     });
     if(allQuestionsAnswered) {      
       this.props.sendResultsDispatch(userId, questions.toJS()).then(res => {
-        alert('success');
+        console.log('success');
         this.props.history.push('/results');
       }).catch(error =>{
         alert(error);

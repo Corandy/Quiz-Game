@@ -16,8 +16,8 @@ const ResultsComponent = ({
             let answerStyle = correct ? 'correct' : 'wrong'; 
             return <div key={index} className={"result_container"}>
                 <div className="result_container__question">{result.questionText}</div>
-                <div className={"result_container__answer result_container__answer--"+answerStyle}>provided answer: {result.answerText}</div>
-                {!correct && <div className="result_container__answer">correct answer: {result.correctAnswerText}</div>}
+                <div>provided answer: <span className={"result_container__answer result_container__answer--"+answerStyle}>{result.answerText}</span></div>
+                {!correct && <div>correct answer: <span className="result_container__answer">{result.correctAnswerText}</span></div>}
             </div>            
         })}
     </span> 

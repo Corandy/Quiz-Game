@@ -19,9 +19,9 @@ const ProgressBar = ({
 
     return <div className={'progress_bar'}>
         {list.map((object, index) => {
-            let color = !!object[propertyFilled] ? '#0f0' : '#888';
-            color = (index+1) === currentPage ? '#00f' : color;   
-            return <div key={index} className={'progress_bar__item'} style={{background:color}}></div>; 
+            let effect = !!object[propertyFilled] ? ' progress_bar__item--filled' : '';
+            effect = (index+1) === currentPage ? ' progress_bar__item--active' : effect;   
+            return <div key={index} className={'progress_bar__item'+effect}></div>; 
         })}   
     </div> 
 }

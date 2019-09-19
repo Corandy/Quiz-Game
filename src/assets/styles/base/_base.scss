@@ -7,6 +7,10 @@ body {
   font-size: 14px;  
 }
 
+a {
+  color: black;
+}
+
 body, .wrapper {
   min-height: 100vh;
   width: 100vw;
@@ -33,6 +37,7 @@ button:disabled {
   background-color: #FAFCFE;
   overflow-y: scroll;
   overflow-x: default;
+  user-select: none;
 }
 
 .flex-break {
