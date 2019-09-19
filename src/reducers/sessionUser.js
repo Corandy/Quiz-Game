@@ -1,5 +1,6 @@
 import Immutable from 'immutable';
 
+//keeps track of user session data
 const initialState = Immutable.fromJS({
   userId: false,
   userMail: false

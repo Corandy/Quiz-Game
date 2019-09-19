@@ -9,6 +9,7 @@ import GridBlock from '../../components/GridBlock';
 import LeaderBoardComponent from '../../components/LeaderBoardComponent';
 import Immutable from 'immutable';
 
+//leaderboard page
 class Leaderboard extends Component {
   
   static defaultProps = {
@@ -23,10 +24,11 @@ class Leaderboard extends Component {
 
   leaderBoardComponent() {  
     const { allResults, getAllResultsDispatch, userId, userMail } = this.props;  
+    //call results when there are no results in redux
     if(!allResults.size) {
       getAllResultsDispatch(); 
       return false;
-    } else {    
+    } else { //send data to leaderboard component
       return <LeaderBoardComponent list={allResults.toJS()} userId={userId} userMail={userMail}/>
     }    
   }

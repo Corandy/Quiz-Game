@@ -1,6 +1,7 @@
 import React from 'react';
 import { Table } from 'react-bootstrap';
 
+//leaderboardcomponent of the leaderboard page
 const LeaderBoardComponent = ({
         list = [], //list with items with propety userId and score
         userId = false, //string or false
@@ -16,6 +17,7 @@ const LeaderBoardComponent = ({
         </thead>
         <tbody>
           {list.map((result, index) => {
+          //when the user is this record, the full name will be displayed and has a font-bold styling
           let thisUser = result.userId === userId;
           let username = thisUser ? userMail : 'player '+(index+1);
           let thisUserStyle = thisUser ? 'bold' : 400;

@@ -5,10 +5,11 @@ const port = 3000;
 
 //set CORS
 app.use(function(req, res, next) {
-  var allowedOrigins = ['http://localhost:8081', 'http://localhost:8080'];
+  /*var allowedOrigins = ['http://localhost:8081', 'http://localhost:8080'];
   if(allowedOrigins.indexOf(req.headers.origin) > -1){
        res.setHeader('Access-Control-Allow-Origin', req.headers.origin);
-  }
+  }*/
+  res.setHeader('Access-Control-Allow-Origin', '*');
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
   next();
 });

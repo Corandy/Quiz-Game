@@ -1,12 +1,11 @@
-import {combineReducers} from 'redux-immutable';
-import Immutable from 'immutable';
+import {combineReducers} from 'redux-immutable'; //for immutable properties
+import Immutable from 'immutable'; //for immutable properties
 import { createStore, applyMiddleware, compose } from 'redux';
-import thunk from 'redux-thunk';
+import thunk from 'redux-thunk'; //for promises within store dispatches
 
-import reducers from '../reducers';
+import reducers from '../reducers';  //all sub stores located
 
-const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose; //for redux webview
 export default () => {
   const store = createStore(
     combineReducers(reducers),

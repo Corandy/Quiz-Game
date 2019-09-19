@@ -8,18 +8,21 @@ import { loginByMailAddress } from '../../actions/sessionUser';
 import GridBlock from '../../components/GridBlock';
 import FieldGroup from '../../components/FieldGroup';
 
+//login page
 class Login extends Component {
 
-  checkMail = (event) => {    
+  checkMailEvent = (event) => {    
     event.preventDefault();
+    //some basic validation
     let value = event.target.elements[0].value;
     if (!value) {
       return alert('Email is required');
     } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(value)) {
       return alert('Invalid email address');
     }
-
-    this.props.loginByMailAddress(value).then(res => {
+  
+    //sends data to server to check if user is not already used, when succesful the user will go automaticly to the question page
+    this.props.loginByMailAddressDispatch(value).then(res => {
       console.log('success');
     }).catch(error =>{
       alert(error);
@@ -29,7 +32,7 @@ class Login extends Component {
   loginComponent() {
     let headerContent = <h4 className="title">Login</h4>; 
     let contentContent = <span>
-      <form onSubmit={this.checkMail}>
+      <form onSubmit={this.checkMailEvent}>
         <FieldGroup type="email" label="Email address" placeholder="Enter email"/>
         <Button bsStyle="primary" type="submit">Login</Button>
       </form>      
@@ -55,11 +58,11 @@ class Login extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  userId: state.get('sessionUser').get('userId') 
+  userId: state.get('sessionUser').get('userId') //encrypted email string
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  loginByMailAddress: bindActionCreators(loginByMailAddress, dispatch)//email encrypted userId
+  loginByMailAddressDispatch: bindActionCreators(loginByMailAddress, dispatch)//input: email
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Login));

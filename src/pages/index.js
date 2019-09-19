@@ -9,6 +9,7 @@ import Quiz from './Quiz';
 import Results from './Results';
 import LeaderBoard from './LeaderBoard';
 
+//the container for the header, footer + the content based on route
 const Main = () => {
   return (
       <div className="wrapper">

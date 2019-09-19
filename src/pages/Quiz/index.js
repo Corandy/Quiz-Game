@@ -11,6 +11,7 @@ import GridBlock from '../../components/GridBlock';
 import ProgressBar from '../../components/ProgressBar';
 import QuestionComponent from '../../components/QuestionComponent';
 
+//the quiz page
 class Quiz extends Component {
   
   static defaultProps = {
@@ -19,16 +20,18 @@ class Quiz extends Component {
     questions: Immutable.List()
   }  
 
-  //if all is filled go to result otherwise warning
+  //if all is filled go to result otherwise give warning
   goToResultsEvent = () => {   
     const {userId, questions} = this.props;
+    //if 1 question is not answered, the allQuestionsAnswered will be false
     var allQuestionsAnswered = true;
     questions.forEach((question) => {
       if(!question.get('user_answer')) {
         allQuestionsAnswered = false;        
       }
     });
-    if(allQuestionsAnswered) {      
+    if(allQuestionsAnswered) { 
+      //send questions with answers to server, the server will validate the answers and save it as results     
       this.props.sendResultsDispatch(userId, questions.toJS()).then(res => {
         console.log('success');
         this.props.history.push('/results');
@@ -59,8 +62,12 @@ class Quiz extends Component {
   footerComponent(currentPage) {
     const {questions, previousQuestionDispatch, nextQuestionDispatch} = this.props;
     return <React.Fragment>
+      {//progressbar to show how far the player is until finish and which page the questions are answered.
+      }
       <ProgressBar currentPage={currentPage} list={questions.toJS()} propertyFilled={'user_answer'} max={10}/>
       <div className={"flex-break"}></div> 
+      {//buttonbar contains previous, next and finish button based on which page the player is        
+      }
       <ButtonBar currentPage={currentPage} min={1} max={10} previousEvent={previousQuestionDispatch} nextEvent={nextQuestionDispatch} finishEvent={this.goToResultsEvent}/>
     </React.Fragment>;
   }

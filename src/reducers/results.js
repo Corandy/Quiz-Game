@@ -1,11 +1,12 @@
 import Immutable from 'immutable';
 
+//state management of the results (both used in the result and leaderboard)
 const initialState = Immutable.fromJS({
-    userResults: Immutable.List(),
-    results: Immutable.List()
+    userResults: Immutable.List(), //results only from the user
+    results: Immutable.List() //results of all players
 });
   
-  export default (state = initialState, action) => {
+ export default (state = initialState, action) => {
     switch (action.type) {
       case 'SET_USER_RESULTS':          
           return state.set('userResults', Immutable.fromJS(action.userResults));
@@ -14,5 +15,5 @@ const initialState = Immutable.fromJS({
       default:
         return state;
     }
-  };
+};
   

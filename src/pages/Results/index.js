@@ -10,6 +10,7 @@ import GridBlock from '../../components/GridBlock';
 import ResultsComponent from '../../components/ResultsComponent';
 import Immutable from 'immutable';
 
+//the result page
 class Results extends Component {
   
   static defaultProps = {
@@ -31,7 +32,7 @@ class Results extends Component {
     if(!userResults.get('userId')) {
       getUserResultsDispatch(userId); 
       return false;
-    } else {    
+    } else { //send data to the resultComponent
       return <ResultsComponent results={userResults.toJS()}/>;
     }
   }
@@ -45,7 +46,7 @@ class Results extends Component {
 
   render() {
     const {userId} = this.props;
-    if(!userId) {
+    if(!userId) { //redirect if no userId
         return <Redirect to='/login'/>
     } else {
       let headerContent = <h4 className="title">Your Results</h4>;
@@ -68,8 +69,8 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  getUserResultsDispatch: bindActionCreators(getUserResults, dispatch), //userId
-  removeUserIdDispatch: bindActionCreators(removeUserId, dispatch)
+  getUserResultsDispatch: bindActionCreators(getUserResults, dispatch), //input: userId
+  removeUserIdDispatch: bindActionCreators(removeUserId, dispatch) //for logout the user
 })
   
 export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Results));

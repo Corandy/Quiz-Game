@@ -5,6 +5,7 @@ const initialState = Immutable.fromJS({
   questions: Immutable.List()
 });
 
+//keeps track of the given questions, if these are answered and on which page the user is
 export default (state = initialState, action) => {
   switch (action.type) {
     case 'SET_QUESTION':          
@@ -13,7 +14,7 @@ export default (state = initialState, action) => {
           return state.update('questions', arr => arr.push(Immutable.fromJS(action.question)));         
         }  
         return state.merge(...state);
-    case 'SET_ANSWER':      
+    case 'SET_ANSWER': //fills answer at the specific question     
       const index = state.get('questions').findIndex((item, index) => {
         return (index+1) === action.page;
       });  

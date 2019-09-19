@@ -1,5 +1,7 @@
 import axios from 'axios';
 
+//get result from node server based on userId. userId is an encrypted mail string
+//when succesful it will update the redux results state
 export const getUserResults = (userId) => {  
     return function(dispatch) {
       return axios.get(`http://localhost:3000/api/results/`+userId)
@@ -15,6 +17,8 @@ export const getUserResults = (userId) => {
     }
   };
 
+  //get results from all players from  node server
+  //when succesful it will update the redux results state
   export const getAllResults = () => {  
     return function(dispatch) {
       return axios.get(`http://localhost:3000/api/results`)
@@ -30,6 +34,8 @@ export const getUserResults = (userId) => {
     }
   };
 
+  //send anwsers to the node server
+  //node server will validate the answers and add a score to it and saves it on the server
   export const sendResults = (userId = false, results = []) => {
     let answers = [];
     for(var i=0; i < results.length; i++) {

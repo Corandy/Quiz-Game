@@ -1,5 +1,7 @@
 import axios from 'axios';
 
+//will send mail adress of user to the server to verify if its unique
+//if succesfull it will fill in the user session data, with this the user is loggedin
 export const loginByMailAddress = (email = false) => {  
   return function(dispatch) {
     return axios.post(`http://localhost:3000/api/verify`, {email: email})
@@ -20,6 +22,7 @@ export const loginByMailAddress = (email = false) => {
   }
 };
 
+//removes the user session, with this the user will be back to the login screen
 export const removeUserId = () => ({
   type: 'REMOVE_USER'
 });

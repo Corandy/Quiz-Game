@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 
+//gridblock helps the developer to get platform responsive design (based on bootstrap)
 class GridBlock extends Component {
     static defaultProps = {
         colSize: 12, //number 1-12    determines how much width the block may have

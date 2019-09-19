@@ -1,6 +1,7 @@
 import React from 'react';
 import { Button } from 'react-bootstrap';
 
+//buttonbar has previous, next, finish button based on which page the user is
 const ButtonBar = ({
         currentPage = 1, //number between min-max  
         min = 0, //number,
