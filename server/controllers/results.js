@@ -4,6 +4,9 @@ const path = require('path');
 
 const dataPath = path.join(__dirname,'../data');
 
+//with export are called by result api commands, otherwise intern functions
+
+//checks if userId already exist in results.json
 checkIfUserAlreadyExistsBasedOnUserId = function(userId) {
     //get results data
     const resultsArray = JSON.parse(fs.readFileSync(dataPath+'/results.json', 'utf8'));
@@ -17,6 +20,7 @@ checkIfUserAlreadyExistsBasedOnUserId = function(userId) {
     return false;
 }
 
+//retrieves the id's and answers of questions from questions.json through the results from results.json
 getQuestionDataFromResultData = function(results, questions) {
     for(var j = 0; j < questions.length; j++) {
         if(results.id === questions[j].id) {
@@ -29,7 +33,7 @@ getQuestionDataFromResultData = function(results, questions) {
     return results;
 }
 
-//validates and returns array with boolean if correct and new object
+//validates answer and returns an array with boolean if correct and a result object
 validateAnswer = function(answer, questions) {
     let newAnswer = {};
     for(var j = 0; j < questions.length; j++) {
@@ -44,6 +48,7 @@ validateAnswer = function(answer, questions) {
     return [correct, newAnswer]
 }
 
+//verify user based on email address (it will encrypt to string and checks in result.json)
 exports.verifyUserBasedOnEmail = function(req, res, next) {
     //make uuid from mail
     const uuid = uuidv3(req.body.email, uuidv3.URL);
@@ -58,6 +63,7 @@ exports.verifyUserBasedOnEmail = function(req, res, next) {
     }
 }
 
+//shows basic result of all users
 exports.showAllResults = function(req, res, next) {
     //get results data
     const resultsArray = JSON.parse(fs.readFileSync(dataPath+'/results.json', 'utf8'));
@@ -73,6 +79,7 @@ exports.showAllResults = function(req, res, next) {
     return res.send(JSON.stringify(sortedArray));
 }
 
+//shows detailed result of a specific user
 exports.showResultsOfSpecificUser = function(req, res, next) {
     const userId = req.params.userId;
 
@@ -110,6 +117,7 @@ exports.showResultsOfSpecificUser = function(req, res, next) {
     return res.send('Not found');
 }
 
+//save results of user
 //input userId, answers
 exports.saveResultOfUser = function(req, res, next) {
     const userId = req.body.userId;    

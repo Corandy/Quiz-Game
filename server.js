@@ -9,7 +9,7 @@ app.use(function(req, res, next) {
   if(allowedOrigins.indexOf(req.headers.origin) > -1){
        res.setHeader('Access-Control-Allow-Origin', req.headers.origin);
   }*/
-  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Origin', '*'); //access control with * is only good for development purposes
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
   next();
 });

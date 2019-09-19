@@ -3,6 +3,7 @@ const path = require('path');
 
 const dataPath = path.join(__dirname,'../data');
 
+//recursive function to search for not already asked question for user
 const takeRandomQuestion = function(resultArray, ignoreList) {    
     var item = resultArray[Math.floor(Math.random()*resultArray.length)];
     //check if question is already asked, if so try other question
@@ -12,6 +13,7 @@ const takeRandomQuestion = function(resultArray, ignoreList) {
     return item;
 }
 
+//gets new question for user (that hasn't already been asked)
 exports.getNewQuestion = function(req, res, next) {
     const ignoreList = req.body.alreadyQuestioned ? JSON.parse(req.body.alreadyQuestioned) : [];
 
