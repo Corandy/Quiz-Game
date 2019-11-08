@@ -20,16 +20,16 @@ app.use(express.static(path.join(__dirname,'/public')));
 
 //API routes
 app.use(require('./server/routes'));
-
+/*
 /// catch 404 and forward to error handler
-app.use(function(req, res, next) {
+app.use('/api', function(req, res, next) {
     var err = new Error('Not Found '+req.url);
     err.status = 404;
     next(err);
 });
-
+*/
 //catch 500 error (development)
-app.use(function(err, req, res, next) {
+app.use('/api', function(err, req, res, next) {
     console.log(err.stack);
     res.status(err.status || 500);
 
