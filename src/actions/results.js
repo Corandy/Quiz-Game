@@ -48,7 +48,7 @@ export const getUserResults = (userId) => {
       answers.push(answer);
     }
     return function(dispatch) {
-      return axios.post(root+'api/results', {userId: userId, answers:answers})
+      return axios.post(root+'/api/results', {userId: userId, answers:answers})
       .then(res => {
         return true;     
       }).catch(err => {
