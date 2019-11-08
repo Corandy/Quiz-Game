@@ -1,9 +1,10 @@
 import axios from 'axios';
 
 export const getQuestion = (alreadyQuestioned = []) => { 
+  let root = document.location.hostname === 'localhost' ? 'http://' + document.location.hostname+':'+window.location.port : 'https://' + document.location.hostname;
   alreadyQuestioned = alreadyQuestioned.length > 0 ? alreadyQuestioned.map((question) => question.id) : alreadyQuestioned;
   return function(dispatch) {
-    return axios.post(`http://localhost:3000/api/question`, {alreadyQuestioned: JSON.stringify(alreadyQuestioned)})
+    return axios.post(root+'/api/question', {alreadyQuestioned: JSON.stringify(alreadyQuestioned)})
     .then(res => {
       if(res.data == 'no questions left') {
         throw ('no questions left');
