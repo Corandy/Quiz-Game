@@ -20,6 +20,7 @@ app.use(express.static(path.join(__dirname,'/public')));
 
 //API routes
 app.use(require('./server/routes'));
+
 /*
 /// catch 404 and forward to error handler
 app.use('/api', function(req, res, next) {
@@ -28,6 +29,16 @@ app.use('/api', function(req, res, next) {
     next(err);
 });
 */
+
+//redirect to index
+app.get('/*', function(req, res) {
+  res.sendFile(path.join(__dirname, 'public/index.html'), function(err) {
+    if (err) {
+      res.status(500).send(err)
+    }
+  })
+})
+
 //catch 500 error (development)
 app.use('/api', function(err, req, res, next) {
     console.log(err.stack);
