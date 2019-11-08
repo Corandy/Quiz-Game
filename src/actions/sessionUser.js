@@ -3,10 +3,10 @@ import axios from 'axios';
 //will send mail adress of user to the server to verify if its unique
 //if succesfull it will fill in the user session data, with this the user is loggedin
 export const loginByMailAddress = (email = false) => {  
-  let root = document.location.hostname === 'localhost' ? document.location.hostname+':'+window.location.port : document.location.hostname;
+  let root = document.location.hostname === 'localhost' ? 'http://' + document.location.hostname+':'+window.location.port : 'https://' + document.location.hostname;
   return function(dispatch) {
-    console.log(root, 'http://'+root+'/api/verify');
-    return axios.post('http://'+root+'/api/verify', {email: email})
+    console.log(root, root+'/api/verify');
+    return axios.post(root+'/api/verify', {email: email})
     .then(res => {
       if(res.data === 'Already Used') {
         throw ('Already used');
