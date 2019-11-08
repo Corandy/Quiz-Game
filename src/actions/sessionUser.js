@@ -4,8 +4,10 @@ import axios from 'axios';
 //if succesfull it will fill in the user session data, with this the user is loggedin
 export const loginByMailAddress = (email = false) => {  
   let root = 'http://' + document.location.hostname === 'localhost' ? document.location.hostname+':'+window.location.port : document.location.hostname;
+  console.log(root);
   return function(dispatch) {
-    return axios.post(root+`/api/verify`, {email: email})
+    console.log(root);
+    return axios.post(root+'/api/verify', {email: email})
     .then(res => {
       if(res.data === 'Already Used') {
         throw ('Already used');
