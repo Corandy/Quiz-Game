@@ -8,6 +8,7 @@
   "author": "Martijn Hoogers",
   "license": "MIT",
   "scripts": {
+    "build": "webpack",
     "build-fe": "webpack",
     "fe-dev-server": "webpack-dev-server",
     "node-live": "node server.js",
